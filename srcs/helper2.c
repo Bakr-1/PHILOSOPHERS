@@ -6,20 +6,20 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:19:21 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/29 01:10:09 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/29 01:43:24 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	ft_atoi_chk(const char *string, size_t *dst)
+int	ft_atoi_chk(const char *str, size_t *dst)
 {
-	if (*string == '\0')
+	if (*str == '\0')
 		return (1);
 	*dst = 0;
-	while (*string && *string >= '0' && *string <= '9')
-		*dst = *dst * 10 + (*string++ - '0');
-	if (*string != '\0')
+	while (*str && *str >= '0' && *str <= '9')
+		*dst = *dst * 10 + (*str++ - '0');
+	if (*str != '\0')
 		return (1);
 	return (0);
 }
