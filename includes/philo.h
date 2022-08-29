@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:18:51 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/29 01:04:05 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/29 22:29:15 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_fk
 
 typedef struct s_philo
 {
+	pthread_t		thread_id;
 	size_t			id;
 	t_fk			fork;
 	size_t			meals;
@@ -76,11 +77,11 @@ typedef struct s_main
 	size_t			ttsleep;
 	size_t			n_meals;
 	size_t			end;
-	int				philo_dead;
-	int				*forks_a;
+	int				forks_a[250];
 	size_t			done;
-	t_philo			*philosopher;
-	pthread_mutex_t	*forks;
+	t_philo			philosopher[250];
+	unsigned int	philo_dead;
+	pthread_mutex_t	forks[250];
 	pthread_mutex_t	write;
 	pthread_mutex_t	die;
 }					t_main;
@@ -93,5 +94,7 @@ void	philo(t_main *m);
 void	*action(void *v);
 void	display_info(t_philo *philo, size_t timestamp, int action);
 void	free_my_boys(t_main *m);
+int		is_dead(t_philo *philo);
+void	pick_fork_norme(t_philo *philo, int fork);
 
 #endif

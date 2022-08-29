@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:14:45 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/29 01:43:02 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/29 23:00:09 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ void	init3(t_main ***m)
 	size_t	i;
 
 	i = 0;
-	(**m)->forks = malloc(sizeof(pthread_mutex_t) * (**m)->n_philo);
-	if (!(**m)->forks)
-		ft_putendl_fd("malloc failed 2", 2, 1);
 	while (i < (**m)->n_philo)
 		pthread_mutex_init(&(**m)->forks[i++], NULL);
 	pthread_mutex_init(&(**m)->write, NULL);
@@ -31,13 +28,7 @@ void	init2(t_main **m)
 	size_t	i;
 
 	i = 0;
-	(*m)->philosopher = malloc(sizeof(t_philo) * ((*m)->n_philo));
-	if (!(*m)->philosopher)
-		return (ft_putendl_fd("malloc failed 1", 2, 1));
-	(*m)->forks_a = malloc(sizeof(int) * ((*m)->n_philo + 1));
-	if (!(*m)->forks_a)
-		return (ft_putendl_fd("malloc failed 1", 2, 1));
-	memset((*m)->forks_a, '\0', sizeof(int) * ((*m)->n_philo));
+	memset((*m)->forks_a, -1, sizeof(int) * ((*m)->n_philo));
 	while (i < (*m)->n_philo)
 	{
 		(*m)->philosopher[i].id = i;
@@ -63,27 +54,27 @@ void	init1(t_main *m, int ac, char **av)
 		return (ft_putendl_fd("Invalid input", 2, 1));
 	if (ac == 5)
 		m->n_meals = -1;
+	m->philo_dead = FALSE;
 	m->end = 0;
 	init2(&m);
 }
 
 void	philo(t_main *m)
 {
-	pthread_t	thread;
 	size_t		i;
 
 	i = 0;
-	pthread_mutex_lock(&m->die);
 	m->st = get_time();
 	while (i < m->n_philo)
 	{
-		if (pthread_create(&thread, NULL, &action, &m->philosopher[i]))
+		if (pthread_create(&(m)->philosopher[i].thread_id, NULL, &action,
+				&m->philosopher[i]))
 			ft_putendl_fd("Thread ERROR", 2, 1);
-		pthread_detach(thread);
 		i++;
 	}
-	pthread_mutex_lock(&m->die);
-	pthread_mutex_unlock(&m->die);
+	i = 0;
+	while (i < m->n_philo)
+		pthread_join(m->philosopher[i++].thread_id, NULL);
 }
 
 int	main(int ac, char **av)
