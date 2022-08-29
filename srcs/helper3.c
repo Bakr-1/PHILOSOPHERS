@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:01:21 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/29 23:06:58 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/29 23:15:49 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,3 +17,5 @@ void	pick_fork_norme(t_philo *philo, int fork)
 	philo->main->forks_a[fork] = philo->id;
 	pthread_mutex_unlock(&philo->main->forks[fork]);
 }
+
+//hello
