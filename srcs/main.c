@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:14:45 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/30 10:49:05 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/30 11:00:07 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ int	main(int ac, char **av)
 		ft_putendl_fd("Usage: ./philo [nop][ttd][tte][tts][notte]", 2, 1);
 	init1(&main, ac, av);
 	philo(&main);
-	free_my_boys(&main);
+	destroy_thex(&main);
 	return (0);
 }

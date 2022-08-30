@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:18:51 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/30 10:48:49 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/30 11:00:04 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_usleep(size_t ms);
 void	philo(t_main *m);
 void	*action(void *v);
 void	display_info(t_philo *philo, size_t timestamp, int action);
-void	free_my_boys(t_main *m);
+void	destroy_thex(t_main *m);
 int		is_dead(t_philo *philo);
 void	pick_fork_norme(t_philo *philo, int fork);
 

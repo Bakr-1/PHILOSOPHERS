@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:19:21 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/30 10:52:34 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:59:55 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	display_info(t_philo *philo, size_t timestamp, int action)
 	pthread_mutex_unlock(&philo->main->write);
 }
 
-void	free_my_boys(t_main *m)
+void	destroy_thex(t_main *m)
 {
 	size_t	k;
 
