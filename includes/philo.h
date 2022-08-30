@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:18:51 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/29 22:29:15 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:48:49 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_main
 	pthread_mutex_t	forks[250];
 	pthread_mutex_t	write;
 	pthread_mutex_t	die;
+	pthread_mutex_t	extra;
 }					t_main;
 
 void	ft_putendl_fd(char *s, int fd, int i);

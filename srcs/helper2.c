@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:19:21 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/29 22:29:39 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:52:34 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	free_my_boys(t_main *m)
 		pthread_mutex_destroy(&m->forks[k++]);
 	pthread_mutex_destroy(&m->write);
 	pthread_mutex_destroy(&m->die);
+	pthread_mutex_destroy(&m->extra);
 }
 
 int	is_dead(t_philo *philo)

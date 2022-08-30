@@ -6,11 +6,17 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:21:00 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/29 23:05:27 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:57:47 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	pick_fork_norme(t_philo *philo, int fork)
+{
+	philo->main->forks_a[fork] = philo->id;
+	pthread_mutex_unlock(&philo->main->forks[fork]);
+}
 
 int	pick_fork(t_philo *philo)
 {
@@ -66,6 +72,7 @@ int	eating(t_philo *philo)
 	philo->eating = 1;
 	philo->last_meal = get_time();
 	display_info(philo, get_time(), TAKING_FORK);
+	display_info(philo, get_time(), TAKING_FORK);
 	display_info(philo, philo->last_meal, EATING);
 	ft_usleep(philo->main->tteat);
 	philo->ttlive = philo->last_meal + philo->main->ttdie;
@@ -74,12 +81,14 @@ int	eating(t_philo *philo)
 	if (philo->main->n_meals > 0 && philo->meals >= philo->main->n_meals)
 	{
 		display_info(philo, philo->last_meal, END);
+		pthread_mutex_lock(&philo->main->extra);
 		philo->main->end++;
 		if (philo->main->end >= philo->main->n_philo)
 		{
-			pthread_mutex_lock(&philo->main->write);
-			pthread_mutex_unlock(&philo->main->die);
+			pthread_mutex_unlock(&philo->main->extra);
+			return (1);
 		}
+		pthread_mutex_unlock(&philo->main->extra);
 		return (1);
 	}
 	return (0);

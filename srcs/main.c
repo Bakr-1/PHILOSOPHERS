@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:14:45 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/29 23:00:09 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:49:05 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init3(t_main ***m)
 		pthread_mutex_init(&(**m)->forks[i++], NULL);
 	pthread_mutex_init(&(**m)->write, NULL);
 	pthread_mutex_init(&(**m)->die, NULL);
+	pthread_mutex_init(&(**m)->extra, NULL);
 }
 
 void	init2(t_main **m)
