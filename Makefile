@@ -1,5 +1,5 @@
 NAME		= philo
-CC			= gcc
+CC			= gcc -fsanitize=address
 CFLAGS		+= -g -pthread -Wall -Wextra -Werror
 RM			= /bin/rm -f
 
@@ -13,7 +13,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@printf "\033[1;32mCleaning..\e[0m\n"
-	rm -f srcs/*.o
+	rm -f $(OBJS)
 
 fclean: clean
 	@$(RM) $(NAME)

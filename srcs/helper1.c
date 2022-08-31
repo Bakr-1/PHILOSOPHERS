@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:33:11 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/29 22:47:53 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/30 13:57:26 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ void	ft_usleep(size_t ms)
 
 	end = get_time() + ms;
 	while (get_time() < end)
-		usleep(100);
+		usleep(ms / 100);
 }

@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:14:45 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/30 11:00:07 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/30 14:09:04 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	init2(t_main **m)
 	while (i < (*m)->n_philo)
 	{
 		(*m)->philosopher[i].id = i;
-		(*m)->philosopher[i].fork.lf = i;
+		(*m)->philosopher[i].forks[i] = i;
+		(*m)->philosopher[i].fork.lf = &((*m)->philosopher[i].forks[i]);
 		(*m)->philosopher[i].fork.rf = (i + 1) % (*m)->n_philo;
 		(*m)->philosopher[i].meals = 0;
 		(*m)->philosopher[i].eating = 0;

@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:19:21 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/30 10:59:55 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/30 13:17:50 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,29 @@ void	display_info(t_philo *philo, size_t timestamp, int action)
 {
 	static int	flag;
 
+	timestamp = get_time();
 	pthread_mutex_lock(&philo->main->write);
 	if (action == TAKING_FORK && !flag)
 		printf(GRN"%zu Philo %zu has taken a fork 🍴\n"RESET,
-			timestamp - philo->main->st, philo->id + 1);
+			timestamp - philo->main->st, philo->id);
 	else if (action == EATING && !flag)
 		printf(GRN"%zu Philo %zu is eating 🍝\n"RESET,
-			timestamp - philo->main->st, philo->id + 1);
+			timestamp - philo->main->st, philo->id);
 	else if (action == SLEEPING && !flag)
 		printf(GRN"%zu Philo %zu is sleeping 😴\n"RESET,
-			timestamp - philo->main->st, philo->id + 1);
+			timestamp - philo->main->st, philo->id);
 	else if (action == THINKING && !flag)
 		printf(GRN"%zu Philo %zu is thinking 🤔\n"RESET,
-			timestamp - philo->main->st, philo->id + 1);
+			timestamp - philo->main->st, philo->id);
 	else if (action == DIED && !flag)
 	{
 		flag++;
 		printf(RED"%zu Philo %zu died 😵\n"RESET,
-			timestamp - philo->main->st, philo->id + 1);
+			timestamp - philo->main->st, philo->id);
 	}
 	else if (action == END && !flag)
 		printf(BLU"%zu Philo %zu has finished his meals 😋\n"RESET,
-			timestamp - philo->main->st, philo->id + 1);
+			timestamp - philo->main->st, philo->id);
 	pthread_mutex_unlock(&philo->main->write);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:18:51 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/30 11:00:04 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/08/30 14:06:39 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef enum e_action
 
 typedef struct s_fk
 {
-	int				lf;
-	int				rf;
+	int				*lf;
+	int				*rf;
 }					t_fk;
 
 typedef struct s_philo
@@ -61,10 +61,13 @@ typedef struct s_philo
 	pthread_t		thread_id;
 	size_t			id;
 	t_fk			fork;
+	size_t			forks[250];
 	size_t			meals;
 	size_t			eating;
 	size_t			last_meal;
 	size_t			ttlive;
+	size_t			avaliable[250];
+	size_t			has_eaten;
 	struct s_main	*main;
 }					t_philo;
 
