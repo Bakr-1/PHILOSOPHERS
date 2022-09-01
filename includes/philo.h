@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:18:51 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/01 19:50:38 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/01 20:13:23 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ void	destroy_thex(t_main *m);
 int		is_dead(t_philo *philo);
 void	pick_fork_norme(t_philo *philo, int fork);
 void	init1(t_main *m, int ac, char **av);
+int		eating(t_philo *philo);
 
 #endif

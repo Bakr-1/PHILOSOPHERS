@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 18:34:58 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/01 20:02:49 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/01 20:13:02 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	init2(t_main **m)
 			(*m)->philosopher[i].left_fork = i + 1;
 		(*m)->philosopher[i].right_fork = i;
 		if (i % 2)
-			ft_swap((*m)->philosopher[i].left_fork, (*m)->philosopher[i].right_fork);
+			ft_swap(&(*m)->philosopher[i].left_fork, &(*m)->philosopher[i].right_fork);
 		(*m)->philosopher[i].meals = 0;
 		(*m)->philosopher[i].eating = 0;
 		(*m)->philosopher[i].forks[i] = -1;

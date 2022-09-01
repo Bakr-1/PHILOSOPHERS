@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:21:00 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/01 20:01:47 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/01 20:13:44 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ int	pick_fork1(t_philo *philo)
 	pthread_mutex_lock(&philo->main->forks[philo->left_fork]);
 	if (is_dead(philo))
 	{
-		pthread_mutex_unlock(philo->main->forks[philo->left_fork]);
+		pthread_mutex_unlock(&philo->main->forks[philo->left_fork]);
 		return (1);
 	}
 	pthread_mutex_lock(&philo->main->forks[philo->right_fork]);
 	if (is_dead(philo))
 	{
-		pthread_mutex_unlock(philo->main->forks[philo->right_fork]);
-		pthread_mutex_unlock(philo->main->forks[philo->left_fork]);
+		pthread_mutex_unlock(&philo->main->forks[philo->right_fork]);
+		pthread_mutex_unlock(&philo->main->forks[philo->left_fork]);
 		return (1);
 	}
 	return (0);
@@ -77,8 +77,8 @@ int	pick_fork(t_philo *philo)
 			return (1);
 		if (is_dead(philo))
 		{
-			pthread_mutex_unlock(philo->main->forks[philo->right_fork]);
-			pthread_mutex_unlock(philo->main->forks[philo->left_fork]);
+			pthread_mutex_unlock(&philo->main->forks[philo->right_fork]);
+			pthread_mutex_unlock(&philo->main->forks[philo->left_fork]);
 			return (1);
 		}
 		if (philo->forks[philo->left_fork] != philo->id
@@ -88,11 +88,12 @@ int	pick_fork(t_philo *philo)
 			eating(philo);
 			break ;
 		}
-		pthread_mutex_unlock(philo->main->forks[philo->right_fork]);
-		pthread_mutex_unlock(philo->main->forks[philo->left_fork]);
+		pthread_mutex_unlock(&philo->main->forks[philo->right_fork]);
+		pthread_mutex_unlock(&philo->main->forks[philo->left_fork]);
 		if (is_dead(philo))
 			return (1);
 	}
+	return (0);
 }
 
 int	eating(t_philo *philo)
@@ -108,8 +109,8 @@ int	eating(t_philo *philo)
 	philo->meals += 1;
 	philo->forks[philo->left_fork] = philo->id;
 	philo->forks[philo->right_fork] = philo->id;
-	pthread_mutex_unlock(philo->main->forks[philo->right_fork]);
-	pthread_mutex_unlock(philo->main->forks[philo->left_fork]);
+	pthread_mutex_unlock(&philo->main->forks[philo->right_fork]);
+	pthread_mutex_unlock(&philo->main->forks[philo->left_fork]);
 	if (philo->main->n_meals > 0 && philo->meals >= philo->main->n_meals)
 	{
 		display_info(philo, philo->last_meal, END);
