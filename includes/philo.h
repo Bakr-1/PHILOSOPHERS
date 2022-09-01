@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:18:51 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/30 14:06:39 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/01 19:50:38 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ typedef struct s_philo
 {
 	pthread_t		thread_id;
 	size_t			id;
-	t_fk			fork;
+	int				left_fork;
+	int				right_fork;
 	size_t			forks[250];
 	size_t			meals;
 	size_t			eating;
@@ -100,5 +101,6 @@ void	display_info(t_philo *philo, size_t timestamp, int action);
 void	destroy_thex(t_main *m);
 int		is_dead(t_philo *philo);
 void	pick_fork_norme(t_philo *philo, int fork);
+void	init1(t_main *m, int ac, char **av);
 
 #endif

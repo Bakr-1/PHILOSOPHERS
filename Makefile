@@ -1,10 +1,10 @@
 NAME		= philo
 CC			= gcc -fsanitize=address
-CFLAGS		+= -g -pthread -Wall -Wextra -Werror
+CFLAGS		+= -g -pthread -Wall -Wextra
 RM			= /bin/rm -f
 
 INCLUDES	= -I includes
-SRCS = srcs/helper2.c srcs/helper1.c srcs/philo.c srcs/main.c
+SRCS = srcs/helper2.c srcs/helper1.c srcs/helper.c srcs/philo.c srcs/main.c
 OBJS = ${SRCS:.c=.o}
 all: $(NAME)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:21:00 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/30 14:09:31 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/01 20:01:47 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,81 @@ void	pick_fork_norme(t_philo *philo, int fork)
 	pthread_mutex_unlock(&philo->main->forks[fork]);
 }
 
-int	pick_fork(t_philo *philo)
+int	pick_fork1(t_philo *philo)
 {
-	int		i;
-	int		fork;
-
-	i = 0;
-	while (i < 2)
+	if (is_dead(philo))
+		return (1);
+	pthread_mutex_lock(&philo->main->forks[philo->left_fork]);
+	if (is_dead(philo))
 	{
-		if (is_dead(philo))
-			return (1);
-		if (i == 0 && philo->id % 2 == 0)
-			fork = philo->fork.rf;
-		else if (i ==  1 &&  philo->id % 2 == 0)
-			fork = philo->fork.lf;
-		else if (i == 0 && philo->id % 2 == 1)
-			fork = philo->fork.lf;
-		else if (i ==  1 &&  philo->id % 2 == 1)
-			fork = philo->fork.rf;
-		printf("left fork %p  right fork %p\n", &(philo->fork.rf), &(philo->fork.lf));
-		pthread_mutex_lock(&philo->main->forks[fork]);
-		if (philo->main->forks_a[fork] != (int)philo->id && !philo->avaliable[fork])
-		{
-			philo->avaliable[fork] = 1;
-			philo->main->forks_a[fork] = philo->id;
-			pthread_mutex_unlock(&philo->main->forks[fork]);
-			if (is_dead(philo))
-				return (1);
-			i++;
-		}
-		else
-			pthread_mutex_unlock(&philo->main->forks[fork]);
+		pthread_mutex_unlock(philo->main->forks[philo->left_fork]);
+		return (1);
+	}
+	pthread_mutex_lock(&philo->main->forks[philo->right_fork]);
+	if (is_dead(philo))
+	{
+		pthread_mutex_unlock(philo->main->forks[philo->right_fork]);
+		pthread_mutex_unlock(philo->main->forks[philo->left_fork]);
+		return (1);
 	}
 	return (0);
+	// int		i;
+	// int		fork;
+
+	// i = 0;
+	// while (i < 2)
+	// {
+	// 	if (is_dead(philo))
+	// 		return (1);
+	// 	if (i == 0 && philo->id % 2 == 0)
+	// 		fork = philo->fork.rf;
+	// 	else if (i ==  1 &&  philo->id % 2 == 0)
+	// 		fork = philo->fork.lf;
+	// 	else if (i == 0 && philo->id % 2 == 1)
+	// 		fork = philo->fork.lf;
+	// 	else if (i ==  1 &&  philo->id % 2 == 1)
+	// 		fork = philo->fork.rf;
+	// 	printf("left fork %p  right fork %p\n", &(philo->fork.rf), &(philo->fork.lf));
+	// 	pthread_mutex_lock(&philo->main->forks[fork]);
+		// if (philo->main->forks_a[fork] != (int)philo->id && !philo->avaliable[fork])
+	// 	{
+	// 		philo->avaliable[fork] = 1;
+	// 		philo->main->forks_a[fork] = philo->id;
+	// 		pthread_mutex_unlock(&philo->main->forks[fork]);
+	// 		if (is_dead(philo))
+	// 			return (1);
+	// 		i++;
+	// 	}
+	// 	else
+	// 		pthread_mutex_unlock(&philo->main->forks[fork]);
+	// }
+	// return (0);
+}
+
+int	pick_fork(t_philo *philo)
+{
+	while (1)
+	{
+		if (pick_fork1(philo))
+			return (1);
+		if (is_dead(philo))
+		{
+			pthread_mutex_unlock(philo->main->forks[philo->right_fork]);
+			pthread_mutex_unlock(philo->main->forks[philo->left_fork]);
+			return (1);
+		}
+		if (philo->forks[philo->left_fork] != philo->id
+			&& philo->forks[philo->right_fork] != philo->id)
+		{
+			display_info(philo, get_time(), TAKING_FORK);
+			eating(philo);
+			break ;
+		}
+		pthread_mutex_unlock(philo->main->forks[philo->right_fork]);
+		pthread_mutex_unlock(philo->main->forks[philo->left_fork]);
+		if (is_dead(philo))
+			return (1);
+	}
 }
 
 int	eating(t_philo *philo)
@@ -59,13 +101,15 @@ int	eating(t_philo *philo)
 		return (1);
 	philo->eating = 1;
 	philo->last_meal = get_time();
-	display_info(philo, get_time(), TAKING_FORK);
-	display_info(philo, get_time(), TAKING_FORK);
 	display_info(philo, philo->last_meal, EATING);
 	ft_usleep(philo->main->tteat);
 	philo->ttlive = philo->last_meal + philo->main->ttdie;
 	philo->eating = 0;
 	philo->meals += 1;
+	philo->forks[philo->left_fork] = philo->id;
+	philo->forks[philo->right_fork] = philo->id;
+	pthread_mutex_unlock(philo->main->forks[philo->right_fork]);
+	pthread_mutex_unlock(philo->main->forks[philo->left_fork]);
 	if (philo->main->n_meals > 0 && philo->meals >= philo->main->n_meals)
 	{
 		display_info(philo, philo->last_meal, END);
