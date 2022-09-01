@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:21:00 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/01 20:13:44 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/01 20:26:22 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int	pick_fork(t_philo *philo)
 			&& philo->forks[philo->right_fork] != philo->id)
 		{
 			display_info(philo, get_time(), TAKING_FORK);
-			eating(philo);
+				if (eating(philo))
+					return (1);
 			break ;
 		}
 		pthread_mutex_unlock(&philo->main->forks[philo->right_fork]);
@@ -162,8 +163,13 @@ void	*action(void *v)
 	philo->ttlive = philo->last_meal + philo->main->ttdie;
 	while (1)
 	{
-		if (pick_fork(philo) || eating(philo) || removing_fork(philo))
-			break ;
+		if (pick_fork(philo))
+			return (NULL);
+		display_info(philo, philo->last_meal + philo->main->tteat, SLEEPING);
+		ft_usleep(philo->main->ttsleep);
+		display_info(philo, get_time(), THINKING);
+		if (is_dead(philo))
+			return (NULL);
 	}
 	return (NULL);
 }
