@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:14:45 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/01 18:34:56 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/02 02:08:45 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ void	philo(t_main *m)
 	size_t		i;
 
 	i = 0;
-	m->st = get_time();
+	m->start_time = get_time();
 	while (i < m->n_philo)
 	{
 		if (pthread_create(&(m)->philosopher[i].thread_id, NULL, &action,
 				&m->philosopher[i]))
 			ft_putendl_fd("Thread ERROR", 2, 1);
+		usleep(50);
 		i++;
 	}
 	i = 0;

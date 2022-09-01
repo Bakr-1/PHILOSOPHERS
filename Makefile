@@ -1,6 +1,6 @@
 NAME		= philo
 CC			= gcc -fsanitize=address
-CFLAGS		+= -g -pthread -Wall -Wextra
+CFLAGS		+= -g -pthread -Wall -Wextra -Werror
 RM			= /bin/rm -f
 
 INCLUDES	= -I includes

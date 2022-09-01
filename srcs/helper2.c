@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:19:21 by aalseri           #+#    #+#             */
-/*   Updated: 2022/08/30 13:17:50 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/02 02:09:31 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,38 @@ void	display_info(t_philo *philo, size_t timestamp, int action)
 {
 	static int	flag;
 
-	timestamp = get_time();
 	pthread_mutex_lock(&philo->main->write);
 	if (action == TAKING_FORK && !flag)
 		printf(GRN"%zu Philo %zu has taken a fork 🍴\n"RESET,
-			timestamp - philo->main->st, philo->id);
+			timestamp - philo->main->start_time, philo->id + 1);
 	else if (action == EATING && !flag)
 		printf(GRN"%zu Philo %zu is eating 🍝\n"RESET,
-			timestamp - philo->main->st, philo->id);
+			timestamp - philo->main->start_time, philo->id + 1);
 	else if (action == SLEEPING && !flag)
 		printf(GRN"%zu Philo %zu is sleeping 😴\n"RESET,
-			timestamp - philo->main->st, philo->id);
+			timestamp - philo->main->start_time, philo->id + 1);
 	else if (action == THINKING && !flag)
 		printf(GRN"%zu Philo %zu is thinking 🤔\n"RESET,
-			timestamp - philo->main->st, philo->id);
+			timestamp - philo->main->start_time, philo->id + 1);
 	else if (action == DIED && !flag)
 	{
 		flag++;
 		printf(RED"%zu Philo %zu died 😵\n"RESET,
-			timestamp - philo->main->st, philo->id);
+			timestamp - philo->main->start_time, philo->id + 1);
 	}
 	else if (action == END && !flag)
 		printf(BLU"%zu Philo %zu has finished his meals 😋\n"RESET,
-			timestamp - philo->main->st, philo->id);
+			timestamp - philo->main->start_time, philo->id + 1);
 	pthread_mutex_unlock(&philo->main->write);
 }
 
 void	destroy_thex(t_main *m)
 {
-	size_t	k;
+	size_t	i;
 
-	k = 0;
-	while (k < m->n_philo)
-		pthread_mutex_destroy(&m->forks[k++]);
+	i = 0;
+	while (i < m->n_philo)
+		pthread_mutex_destroy(&m->forks_mute[i++]);
 	pthread_mutex_destroy(&m->write);
 	pthread_mutex_destroy(&m->die);
 	pthread_mutex_destroy(&m->extra);

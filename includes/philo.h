@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:18:51 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/01 20:13:23 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/02 02:09:52 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ typedef enum e_action
 	END,
 }				t_action;
 
-typedef struct s_fk
-{
-	int				*lf;
-	int				*rf;
-}					t_fk;
+// typedef struct s_fk
+// {
+// 	int				*lf;
+// 	int				*rf;
+// }					t_fk;
 
 typedef struct s_philo
 {
@@ -62,30 +62,26 @@ typedef struct s_philo
 	size_t			id;
 	int				left_fork;
 	int				right_fork;
-	size_t			forks[250];
 	size_t			meals;
 	size_t			eating;
 	size_t			last_meal;
 	size_t			ttlive;
-	size_t			avaliable[250];
-	size_t			has_eaten;
 	struct s_main	*main;
 }					t_philo;
 
 typedef struct s_main
 {
-	size_t			st;
+	size_t			start_time;
 	size_t			n_philo;
 	size_t			tteat;
 	size_t			ttdie;
 	size_t			ttsleep;
 	size_t			n_meals;
 	size_t			end;
-	int				forks_a[250];
-	size_t			done;
+	int				forks_array[250];
 	t_philo			philosopher[250];
 	unsigned int	philo_dead;
-	pthread_mutex_t	forks[250];
+	pthread_mutex_t	forks_mute[250];
 	pthread_mutex_t	write;
 	pthread_mutex_t	die;
 	pthread_mutex_t	extra;
