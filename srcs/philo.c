@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:21:00 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/02 11:32:51 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/02 15:22:01 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,14 @@ int	pick_fork(t_philo *philo)
 int	eating2(t_philo *philo)
 {
 	display_info(philo, philo->last_meal, END);
+	pthread_mutex_lock(&philo->main->extra);
 	philo->main->end++;
 	if (philo->main->end >= philo->main->n_philo)
-		return (1);
+		{
+			pthread_mutex_unlock(&philo->main->extra);
+			return (1);
+		}
+	pthread_mutex_unlock(&philo->main->extra);
 	return (1);
 }
 
@@ -75,7 +80,7 @@ int	eating(t_philo *philo)
 	philo->eating = 1;
 	philo->last_meal = get_time();
 	display_info(philo, philo->last_meal, EATING);
-	ft_usleep(philo->main->tteat);
+	ft_usleep(philo->main->tteat, philo);
 	philo->ttlive = philo->last_meal + philo->main->ttdie;
 	philo->eating = 0;
 	philo->meals += 1;
@@ -103,9 +108,11 @@ void	*action(void *v)
 	{
 		if (pick_fork(philo))
 			return (NULL);
-		display_info(philo, philo->last_meal + philo->main->tteat, SLEEPING);
-		ft_usleep(philo->main->ttsleep);
-		display_info(philo, get_time(), THINKING);
+		display_info(philo, get_time(), SLEEPING);
+		ft_usleep(philo->main->ttsleep,philo);
+		if (is_dead(philo))
+			return (NULL);
+		display_info(philo, get_time(),THINKING);
 		if (is_dead(philo))
 			return (NULL);
 	}

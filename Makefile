@@ -1,6 +1,6 @@
 NAME		= philo
 CC			= gcc
-CFLAGS		+= -g -pthread -Wall -Wextra -Werror
+CFLAGS		+= -g -pthread 
 RM			= /bin/rm -f
 
 INCLUDES	= -I includes

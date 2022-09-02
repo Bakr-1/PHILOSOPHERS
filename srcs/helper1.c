@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:33:11 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/02 11:35:33 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/02 16:11:13 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,20 @@ size_t	get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void	ft_usleep(size_t duration)
+void	ft_usleep(size_t duration, t_philo *philo)
 {
-	long long	start_sleep;
+	size_t	start_sleep;
+	size_t	test;
 
 	start_sleep = get_time();
-	while (get_time() - start_sleep < duration)
-		usleep(duration);
+	test = get_time() - start_sleep;
+	while (test < duration)
+	{
+		test = get_time() - start_sleep;
+		if (test > philo->ttlive - start_sleep)
+			break ;
+		// printf("sleeping for %zu\n", start_sleep - philo->ttlive);
+		// printf("%zu\n",test);
+		usleep(10);
+	}
 }
