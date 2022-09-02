@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:18:51 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/02 02:09:52 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/02 11:25:50 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct s_main
 	pthread_mutex_t	forks_mute[250];
 	pthread_mutex_t	write;
 	pthread_mutex_t	die;
-	pthread_mutex_t	extra;
 }					t_main;
 
 void	ft_putendl_fd(char *s, int fd, int i);
@@ -99,5 +98,6 @@ int		is_dead(t_philo *philo);
 void	pick_fork_norme(t_philo *philo, int fork);
 void	init1(t_main *m, int ac, char **av);
 int		eating(t_philo *philo);
+int		unlock_forks(t_philo *philo);
 
 #endif

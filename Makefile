@@ -1,5 +1,5 @@
 NAME		= philo
-CC			= gcc -fsanitize=address
+CC			= gcc
 CFLAGS		+= -g -pthread -Wall -Wextra -Werror
 RM			= /bin/rm -f
 

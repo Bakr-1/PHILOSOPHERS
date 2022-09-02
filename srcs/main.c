@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:14:45 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/02 02:08:45 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/02 11:33:07 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	philo(t_main *m)
 		if (pthread_create(&(m)->philosopher[i].thread_id, NULL, &action,
 				&m->philosopher[i]))
 			ft_putendl_fd("Thread ERROR", 2, 1);
-		usleep(50);
+		usleep(10);
 		i++;
 	}
 	i = 0;

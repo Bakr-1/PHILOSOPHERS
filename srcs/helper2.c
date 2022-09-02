@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:19:21 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/02 02:09:31 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/02 11:26:08 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	destroy_thex(t_main *m)
 		pthread_mutex_destroy(&m->forks_mute[i++]);
 	pthread_mutex_destroy(&m->write);
 	pthread_mutex_destroy(&m->die);
-	pthread_mutex_destroy(&m->extra);
 }
 
 int	is_dead(t_philo *philo)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:21:00 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/02 02:05:32 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/02 11:32:51 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,13 @@ int	pick_fork(t_philo *philo)
 			&& philo->main->forks_array[philo->right_fork] != (int)philo->id)
 		{
 			display_info(philo, get_time(), TAKING_FORK);
+			display_info(philo, get_time(), TAKING_FORK);
 			if (eating(philo))
-				return (1);
+				return (unlock_forks(philo));
 			break ;
 		}
 		pthread_mutex_unlock(&philo->main->forks_mute[philo->right_fork]);
 		pthread_mutex_unlock(&philo->main->forks_mute[philo->left_fork]);
-		if (is_dead(philo))
-			return (1);
 	}
 	return (0);
 }
@@ -63,14 +62,9 @@ int	pick_fork(t_philo *philo)
 int	eating2(t_philo *philo)
 {
 	display_info(philo, philo->last_meal, END);
-	pthread_mutex_lock(&philo->main->extra);
 	philo->main->end++;
 	if (philo->main->end >= philo->main->n_philo)
-	{
-		pthread_mutex_unlock(&philo->main->extra);
 		return (1);
-	}
-	pthread_mutex_unlock(&philo->main->extra);
 	return (1);
 }
 
@@ -99,12 +93,12 @@ void	*action(void *v)
 	t_philo	*philo;
 
 	philo = (t_philo *)v;
+	philo->last_meal = get_time();
+	philo->ttlive = philo->last_meal + philo->main->ttdie;
 	if (philo->main->n_philo == 1)
 		while (1)
 			if (is_dead(philo))
 				return (NULL);
-	philo->last_meal = get_time();
-	philo->ttlive = philo->last_meal + philo->main->ttdie;
 	while (1)
 	{
 		if (pick_fork(philo))

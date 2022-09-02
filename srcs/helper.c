@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 18:34:58 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/02 02:04:54 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/02 11:25:41 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	init3(t_main ***m)
 		pthread_mutex_init(&(**m)->forks_mute[i++], NULL);
 	pthread_mutex_init(&(**m)->write, NULL);
 	pthread_mutex_init(&(**m)->die, NULL);
-	pthread_mutex_init(&(**m)->extra, NULL);
 }
 
 void	init2(t_main **m)
@@ -73,4 +72,11 @@ void	init1(t_main *m, int ac, char **av)
 	m->end = 0;
 	memset(m->forks_array, -1, sizeof(int) * 250);
 	init2(&m);
+}
+
+int	unlock_forks(t_philo *philo)
+{
+	pthread_mutex_unlock(&philo->main->forks_mute[philo->left_fork]);
+	pthread_mutex_unlock(&philo->main->forks_mute[philo->right_fork]);
+	return (1);
 }
