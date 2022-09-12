@@ -134,8 +134,8 @@ with the number of times each philosopher must eat is optional.
 as an additional step you can have multiple test cases in the Makefile from t1-t6 and can be executed as follows:
 ```bash
 $>make t1
-```
-```bash
-$>make t2
+philo will die after 800
+./philo 1 800 200 200
+802 Philo 1 died 😵
 ```
 and so on
