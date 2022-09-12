@@ -65,7 +65,7 @@ t2:
 
 # no die. 'x is eating' should appear 7 times.
 t3:
-	@echo "no philo should die should end after each philo eat 7 times"
+	@echo "no philo should die. should end after each philo eat 7 times"
 	@sleep 3
 	./$(NAME) 5 800 200 200 7
 
