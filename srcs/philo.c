@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:21:00 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/02 15:22:01 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/12 20:00:55 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	pick_fork(t_philo *philo)
 			display_info(philo, get_time(), TAKING_FORK);
 			display_info(philo, get_time(), TAKING_FORK);
 			if (eating(philo))
-				return (unlock_forks(philo));
+				return (1);
 			break ;
 		}
 		pthread_mutex_unlock(&philo->main->forks_mute[philo->right_fork]);
