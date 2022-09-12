@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:18:51 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/02 15:19:53 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/12 20:31:01 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,6 @@ typedef enum e_action
 	END,
 }				t_action;
 
-// typedef struct s_fk
-// {
-// 	int				*lf;
-// 	int				*rf;
-// }					t_fk;
-
 typedef struct s_philo
 {
 	pthread_t		thread_id;
@@ -88,17 +82,17 @@ typedef struct s_main
 	pthread_mutex_t	extra;
 }					t_main;
 
-void	ft_putendl_fd(char *s, int fd, int i);
+int		ft_putendl_fd(char *s, int fd);
 int		ft_atoi_chk(const char *string, size_t *dst);
 size_t	get_time(void);
 void	ft_usleep(size_t ms, t_philo *ph);
-void	philo(t_main *m);
+int		philo(t_main *m);
 void	*action(void *v);
 void	display_info(t_philo *philo, size_t timestamp, int action);
 void	destroy_thex(t_main *m);
 int		is_dead(t_philo *philo);
 void	pick_fork_norme(t_philo *philo, int fork);
-void	init1(t_main *m, int ac, char **av);
+int		init1(t_main *m, int ac, char **av);
 int		eating(t_philo *philo);
 int		unlock_forks(t_philo *philo);
 

@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:21:00 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/12 20:00:55 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/12 20:31:43 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int	eating2(t_philo *philo)
 	pthread_mutex_lock(&philo->main->extra);
 	philo->main->end++;
 	if (philo->main->end >= philo->main->n_philo)
-		{
-			pthread_mutex_unlock(&philo->main->extra);
-			return (1);
-		}
+	{
+		pthread_mutex_unlock(&philo->main->extra);
+		return (1);
+	}
 	pthread_mutex_unlock(&philo->main->extra);
 	return (1);
 }

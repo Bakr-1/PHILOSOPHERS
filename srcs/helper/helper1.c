@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalseri <aalseri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:33:11 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/02 16:11:13 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/12 20:32:00 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void	ft_putstr_fd(char *str, int fd)
 		ft_putchar_fd(str[i++], fd);
 }
 
-void	ft_putendl_fd(char *s, int fd, int i)
+int	ft_putendl_fd(char *s, int fd)
 {
 	ft_putstr_fd(s, fd);
 	ft_putchar_fd('\n', fd);
-	if (i)
-		exit (1);
+	return (1);
 }
 
 size_t	get_time(void)
@@ -56,8 +55,6 @@ void	ft_usleep(size_t duration, t_philo *philo)
 		test = get_time() - start_sleep;
 		if (test > philo->ttlive - start_sleep)
 			break ;
-		// printf("sleeping for %zu\n", start_sleep - philo->ttlive);
-		// printf("%zu\n",test);
 		usleep(10);
 	}
 }

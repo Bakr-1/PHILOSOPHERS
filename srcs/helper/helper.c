@@ -6,7 +6,7 @@
 /*   By: aalseri <aalseri@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 18:34:58 by aalseri           #+#    #+#             */
-/*   Updated: 2022/09/12 20:00:24 by aalseri          ###   ########.fr       */
+/*   Updated: 2022/09/12 20:30:38 by aalseri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ void	init2(t_main **m)
 	init3(&m);
 }
 
-void	init1(t_main *m, int ac, char **av)
+int	init1(t_main *m, int ac, char **av)
 {
 	if (ft_atoi_chk(av[1], &m->n_philo) || m->n_philo == 0
 		|| ft_atoi_chk(av[2], &m->ttdie) || m->ttdie == 0
 		|| ft_atoi_chk(av[3], &m->tteat) || m->tteat == 0
 		|| ft_atoi_chk(av[4], &m->ttsleep) || m->ttsleep == 0)
-		return (ft_putendl_fd("Invalid input", 2, 1));
+		return (ft_putendl_fd("Invalid input", 2));
 	if (ac == 6 && (ft_atoi_chk(av[5], &m->n_meals)
 			|| m->n_meals == 0))
-		return (ft_putendl_fd("Invalid input", 2, 1));
+		return (ft_putendl_fd("Invalid input", 2));
 	if (ac == 5)
 		m->n_meals = -1;
 	m->philo_dead = FALSE;
@@ -74,4 +74,5 @@ void	init1(t_main *m, int ac, char **av)
 	m->flag = 0;
 	memset(m->forks_array, -1, sizeof(int) * 250);
 	init2(&m);
+	return (0);
 }
