@@ -12,6 +12,10 @@ Each philosopher thinks. When he gets hungry, he sits down and picks up the two 
 
 If a philosopher can pick up both forks, he eats for a while. After a philosopher finishes eating, he puts down the forks and starts to sleep and think.
 
+
+[more resources](https://www.ecb.torontomu.ca/~courses/coe518/Labs/lab4/lisi.edu-dining-Philosopherecture8.pdf)
+
+
 # ℹ️Overview
   • One or more philosophers sit at a round table.
   
